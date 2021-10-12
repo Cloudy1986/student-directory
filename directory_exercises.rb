@@ -28,6 +28,13 @@ def print(students)
   end
 end
 
+def print_specific_letter(students)
+  puts "-------------"
+  puts "Students beginning with the letter 'M':"
+  students.each do |student| puts "#{student[:name]}" if student[:name][0] == "M"
+  end
+end
+
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
@@ -37,3 +44,4 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
+print_specific_letter(students)
