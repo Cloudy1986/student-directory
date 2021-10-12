@@ -42,6 +42,16 @@ def print_less_than_12_characters(students)
   end
 end
 
+def print_loop(students)
+  puts "-------------"
+  puts "Print students using looping:"
+  count = 0
+  while count < students.length do
+    puts "#{students[count][:name]}"
+    count += 1
+  end
+end
+
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
@@ -53,3 +63,4 @@ print(students)
 print_footer(students)
 print_specific_letter(students)
 print_less_than_12_characters(students)
+print_loop(students)
