@@ -35,6 +35,13 @@ def print_specific_letter(students)
   end
 end
 
+def print_less_than_12_characters(students)
+  puts "-------------"
+  puts "Students with less than 12 characters:"
+  students.each do |student| puts "#{student[:name]}" if student[:name].length < 12
+  end
+end
+
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
@@ -45,3 +52,4 @@ print_header
 print(students)
 print_footer(students)
 print_specific_letter(students)
+print_less_than_12_characters(students)
