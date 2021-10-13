@@ -7,8 +7,13 @@ def input_students
   name = gets.chomp
   #while the name is not empty, repeat this code
   while !name.empty? do
+    # get more info about students
+    puts "Enter hobbies"
+    hobby = gets.chomp
+    puts "Enter country of birth"
+    country = gets.chomp
     # add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: :november, hobby: hobby, country: country}
     puts "Now we have #{students.count} students"
     # get another name from the user
     name = gets.chomp
@@ -24,14 +29,14 @@ end
 
 def print(students)
   students.each.with_index(1) do |student,index|
-    puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index}. #{student[:name]} (cohort: #{student[:cohort]}, hobby: #{student[:hobby]}, country: #{student[:country]})"
   end
 end
 
 def print_specific_letter(students)
   puts "-------------"
   puts "Students beginning with the letter 'M':"
-  students.each do |student| puts "#{student[:name]}" if student[:name][0] == "M"
+  students.each do |student| puts "#{student[:name]}" if student[:name][0] == "M" || student[:name][0] == "m"
   end
 end
 
