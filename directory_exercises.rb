@@ -1,15 +1,14 @@
+@students = [] # an empty array accessible to all methods
+
 def input_students
-  # ask for the names of students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  # set up an empty array
-  students = []
   # set up an array of valid months
   months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
   # set up variable for cohort
   cohort = ""
   # get name from user
-  name = gets.strip.capitalize
+  name = gets.chomp.capitalize
   # loop while name is not empty
   while !name.empty? do
     # while months doesn't include cohort, ask for the cohort and get the valid month
@@ -20,18 +19,16 @@ def input_students
     # convert cohort to a symbol
     cohort = cohort.to_sym
     # add a hash containing name and cohort to the students array
-    students << {name: name, cohort: cohort.to_sym}
+    @students << {name: name, cohort: cohort.to_sym}
     # output the number of students
-    if students.count == 1
-      puts "Now we have #{students.count} student"
+    if @students.count == 1
+      puts "Now we have #{@students.count} student"
     else
-      puts "Now we have #{students.count} students"
+      puts "Now we have #{@students.count} students"
     end
     # get another name from the user
     name = gets.chomp.capitalize
   end
-  # return the array of students
-  students
 end
 
 def print_header
@@ -39,45 +36,45 @@ def print_header
   puts "-------------"
 end
 
-def print(students)
-  students.each.with_index(1) do |student,index|
+def print_students_list
+  @students.each.with_index(1) do |student,index|
   puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
-def print_footer(students)
-  if students == []
+def print_footer
+  if @students == []
     puts "There are not students yet"
   else
-    puts "Overall, we have #{students.count} great students"
+    puts "Overall, we have #{@students.count} great students"
   end
 end
 
-def print_specific_letter(students)
+def print_specific_letter
   puts "-------------"
   puts "Students beginning with the letter 'M':"
-  students.each do |student| puts "#{student[:name]}" if student[:name][0] == "M"
+  @students.each do |student| puts "#{student[:name]}" if student[:name][0] == "M"
   end
 end
 
-def print_less_than_12_characters(students)
+def print_less_than_12_characters
   puts "-------------"
   puts "Students with less than 12 characters:"
-  students.each do |student| puts "#{student[:name]}" if student[:name].length < 12
+  @students.each do |student| puts "#{student[:name]}" if student[:name].length < 12
   end
 end
 
-def print_loop(students)
+def print_loop
   puts "-------------"
   puts "Print students using looping:"
   count = 0
-  while count < students.length do
+  while count < @students.length do
     puts "#{students[count][:name]}"
     count += 1
   end
 end
 
-def print_groups(students)
+def print_groups
 # students will look something like this:
 # [{:name=>"Dave", :cohort=>:May}, {:name=>"Frank", :cohort=>:March}, {:name=>"Mark", :cohort=>:May}]
 # goal to be able to display the people in each cohort group is to get to this:
@@ -85,7 +82,7 @@ def print_groups(students)
   puts "-------------"
   people_by_group = {}
 
-  students.each do |person|
+  @students.each do |person|
     group = person[:cohort]
 
     if people_by_group[group] == nil
@@ -106,37 +103,44 @@ def print_groups(students)
 end
 
 def interactive_menu
-  students = []
   loop do
-    # 1. print the menu and ask the user what to do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit" # 9 because we'll be adding more items
-    # 2. read the input and save it into a variable
-    selection = gets.chomp
-    # 3. do what the user has asked
-    case selection
+    print_menu
+    process(gets.chomp)
+  end
+end
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
+end
+
+def show_students
+  print_header
+  print_students_list
+  print_footer
+end
+
+def process(selection)
+  case selection
     when "1"
-      students = input_students
+      input_students
     when "2"
-      print_header
-      print(students)
-      print_footer(students)
+      show_students
     when "9"
-      exit # this will cause the program to terminate
+      exit
     else
       puts "I don't know what you meant, try again"
-    end
   end
 end
 
 # nothing happens until we call the methods
-#students = input_students
+#input_students
 #print_header
-#print(students)
-#print_footer(students)
-#print_groups(students)
-#print_specific_letter(students)
-#print_less_than_12_characters(students)
-#print_loop(students)
+#print_students
+#print_footer
+#print_groups
+#print_specific_letter
+#print_less_than_12_characters
+#print_loop
 interactive_menu
