@@ -22,7 +22,11 @@ def input_students
     # add a hash containing name and cohort to the students array
     students << {name: name, cohort: cohort.to_sym}
     # output the number of students
-    puts "Now we have #{students.count} students"
+    if students.count == 1
+      puts "Now we have #{students.count} student"
+    else
+      puts "Now we have #{students.count} students"
+    end
     # get another name from the user
     name = gets.chomp.capitalize
   end
