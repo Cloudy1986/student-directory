@@ -69,11 +69,36 @@ def print_loop(students)
   end
 end
 
+def print_groups(students)
+# students will look something like this:
+# [{:name=>"Dave", :cohort=>:May}, {:name=>"Frank", :cohort=>:March}, {:name=>"Mark", :cohort=>:May}]
+# goal to be able to display the people in each cohort group is to get to this:
+# {:May => ["Dave", "Mark"], :March => ["Frank"]}
+  puts "-------------"
+  people_by_group = {}
+
+  students.each do |person|
+    group = person[:cohort]
+
+    if people_by_group[group] == nil
+    people_by_group[group] = []
+    end
+
+    people_by_group[group].push(person[:name])
+  end
+  
+  puts "Which cohort would you like to print?"
+  user_input = gets.chomp.capitalize
+  puts "The people in #{user_input}'s cohort are:"
+  puts people_by_group[user_input.to_sym]
+end
+
 # nothing happens until we call the methods
 students = input_students
 print_header
 print(students)
 print_footer(students)
+print_groups(students)
 #print_specific_letter(students)
 #print_less_than_12_characters(students)
 #print_loop(students)
