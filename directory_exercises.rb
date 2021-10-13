@@ -9,7 +9,7 @@ def input_students
   # set up variable for cohort
   cohort = ""
   # get name from user
-  name = gets.chomp.capitalize
+  name = gets.strip.capitalize
   # loop while name is not empty
   while !name.empty? do
     # while months doesn't include cohort, ask for the cohort and get the valid month
