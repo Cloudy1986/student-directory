@@ -88,9 +88,13 @@ def print_groups(students)
   end
   
   puts "Which cohort would you like to print?"
-  user_input = gets.chomp.capitalize
-  puts "The people in #{user_input}'s cohort are:"
-  puts people_by_group[user_input.to_sym]
+  user_input = gets.chomp.capitalize.to_sym
+  if people_by_group.has_key?(user_input)
+    puts "The people in #{user_input.to_s}'s cohort are:"
+    puts people_by_group[user_input]
+  else
+    puts "There isn't a cohort for the month you've chosen"
+  end
 end
 
 # nothing happens until we call the methods
