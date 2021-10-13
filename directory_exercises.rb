@@ -41,12 +41,16 @@ end
 
 def print(students)
   students.each.with_index(1) do |student,index|
-    puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+  puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  if students == []
+    puts "There are not students yet"
+  else
+    puts "Overall, we have #{students.count} great students"
+  end
 end
 
 def print_specific_letter(students)
@@ -106,7 +110,7 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
-print_groups(students)
+#print_groups(students)
 #print_specific_letter(students)
 #print_less_than_12_characters(students)
 #print_loop(students)
