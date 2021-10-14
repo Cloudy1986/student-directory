@@ -50,7 +50,7 @@ def input_students
     # convert a string into symbol
     cohort = cohort.to_sym
     # add the student hash to the array
-    @students << {name: name, cohort: cohort.to_sym}
+    add_student(name, cohort)
     # Use singular form when appropriate and plural form otherwise
     if @students.count == 1
       puts "Now we have #{@students.count} student"
@@ -60,6 +60,10 @@ def input_students
     # get another name from the user
     name = STDIN.gets.chomp
   end
+end
+
+def add_student(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 def show_students
@@ -99,7 +103,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+    add_student(name, cohort)
   end
   file.close
 end
