@@ -19,12 +19,16 @@ def process(selection)
   case selection
   when "1"
     input_students
+    successful_action
   when "2"
     show_students
+    successful_action
   when "3"
     save_students
+    successful_action
   when "4"
     load_students
+    successful_action
   when "9"
     exit # this will cause the program to terminate
   else
@@ -85,6 +89,14 @@ end
 
 def print_footer
   puts "Overall, we have #{@students.count} great students"
+end
+
+def successful_action
+  puts "             "
+  puts "-------------"
+  puts "Action was successfully completed"
+  puts "-------------"
+  puts "             "
 end
 
 def save_students
