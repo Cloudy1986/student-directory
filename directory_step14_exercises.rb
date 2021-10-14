@@ -144,5 +144,14 @@ def try_load_students
   end
 end
 
+def view_source_code
+  File.open(__FILE__, "r") do |file|
+    file.readlines.each do |line|
+      puts line
+    end
+  end
+end
+
 try_load_students
 interactive_menu
+#view_source_code
