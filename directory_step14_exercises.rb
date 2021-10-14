@@ -1,3 +1,5 @@
+require "csv"
+
 @students = [] # an empty array accessible to all methods
 
 def print_menu
@@ -108,20 +110,19 @@ end
 
 def save_students
   # open the file for writing
-  File.open(@user_filename, "w") do |file|
+  CSV.open(@user_filename, "w") do |file|
     # iterate over the array of students
     @students.each do |student|
     student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+    file << student_data
     end
   end
 end
 
 def load_students
-  File.open(@user_filename, "r") do |file|
+  CSV.open(@user_filename, "r") do |file|
     file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
+    name, cohort = line[0], line[1]
     add_student(name, cohort)
     end
   end
@@ -132,7 +133,8 @@ def try_load_students
   if filename.nil? # if a filename is not provided
     @user_filename = "students.csv"
     load_students
-  elsif File.exists?(filename) # if a filename is provided and it exists real_file.csv
+    puts "Loaded #{@students.count} students from #{@user_filename}"
+  elsif File.exists?(filename) # if a filename is provided and it exists e.g real_file.csv
     @user_filename = filename
     load_students
     puts "Loaded #{@students.count} from #{filename}"
