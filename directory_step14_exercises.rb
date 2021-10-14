@@ -24,6 +24,7 @@ def process(selection)
     show_students
     successful_action
   when "3"
+    choose_file
     save_students
     successful_action
   when "4"
@@ -99,10 +100,15 @@ def successful_action
   puts "             "
 end
 
+def choose_file
+  puts "Enter the filename you want to use"
+  @user_filename = gets.chomp.downcase
+end
+
 def save_students
-  #open the file for writing
-  file = File.open("students.csv", "w")
-  #iterate over the array of students
+  # open the file for writing
+  file = File.open(@user_filename, "w")
+  # iterate over the array of students
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
